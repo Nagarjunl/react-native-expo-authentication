@@ -1,7 +1,9 @@
 import React from "react";
-import { store } from "./src/app/store";
+import { store, persistor } from "./src/app/store";
 import { Provider } from "react-redux";
 import { useSelector } from "react-redux";
+
+import { PersistGate } from "redux-persist/integration/react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -13,7 +15,6 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   const { access_token } = useSelector((state) => state.auth);
-  console.log(access_token);
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -37,7 +38,9 @@ function App() {
 export default () => {
   return (
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   );
 };

@@ -21,14 +21,19 @@ const Home = () => {
     }
   }, [isLoading, membersList]);
 
-  console.log(membersList);
-
   return (
     <View style={styles.container}>
       {members &&
         members.map((member) => (
-          <Text style={styles.bigBlue}>{member.name}</Text>
+          <Text style={styles.bigBlue} key={member.id}>
+            {member.name}
+          </Text>
         ))}
+
+      <Button
+        onPress={() => navigation.openDrawer()}
+        title="Open left drawer"
+      />
 
       <Button title="Sign out" onPress={signOut} />
     </View>
