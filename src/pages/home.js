@@ -30,11 +30,6 @@ const Home = () => {
           </Text>
         ))}
 
-      <Button
-        onPress={() => navigation.openDrawer()}
-        title="Open left drawer"
-      />
-
       <Button title="Sign out" onPress={signOut} />
     </View>
   );
