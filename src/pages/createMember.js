@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { StyleSheet, Button, TextInput, View, Text } from "react-native";
-import {
-  usePostMembersMutation,
-  useGetMemberQuery,
-} from "../services/membersAPI";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState } from 'react'
+import { StyleSheet, Button, TextInput, View, Text } from 'react-native'
+import { usePostMembersMutation } from '../services/membersAPI'
+import { useForm, Controller } from 'react-hook-form'
 
 function CreateMember() {
   const {
@@ -14,14 +11,14 @@ function CreateMember() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      mobile_number: "",
+      name: '',
+      mobile_number: '',
     },
-  });
-  const [postMember] = usePostMembersMutation();
+  })
+  const [postMember] = usePostMembersMutation()
 
   const createMember = async (data) => {
-    const { name, mobile_number, id_proof } = data;
+    const { name, mobile_number, id_proof } = data
 
     await postMember({
       name: name,
@@ -31,14 +28,14 @@ function CreateMember() {
       .unwrap()
       .then(() => reset())
       .then(() => {
-        console.log(data);
-      });
-  };
+        console.log(data)
+      })
+  }
 
   const onSubmit = (data) => {
-    createMember(data);
-    console.log(data);
-  };
+    createMember(data)
+    console.log(data)
+  }
 
   return (
     <>
@@ -86,7 +83,7 @@ function CreateMember() {
         </View>
       </View>
     </>
-  );
+  )
 }
 const styles = StyleSheet.create({
   input: {
@@ -94,12 +91,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 7,
-    borderColor: "#a9a9a9",
+    borderColor: '#a9a9a9',
     marginTop: 12,
   },
   button: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     borderRadius: 10,
   },
   profileImgContainer: {
@@ -107,20 +104,20 @@ const styles = StyleSheet.create({
     height: 150,
     marginLeft: 120,
     borderRadius: 150 / 2,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderWidth: 3,
-    borderColor: "red",
+    borderColor: 'red',
   },
 
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     margin: 4,
   },
   fixToText: {
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 40,
   },
-});
+})
 
-export default CreateMember;
+export default CreateMember

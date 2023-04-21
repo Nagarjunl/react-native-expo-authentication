@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { Button, TextInput, View } from "react-native";
+import React, { useEffect } from 'react'
+import { Button, TextInput, View } from 'react-native'
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
 
-import { addTokens } from "../features/auth/authSlice";
+import { addTokens } from '../features/auth/authSlice'
 
-import { useVerifyOtpMutation } from "../services/authAPI";
+import { useVerifyOtpMutation } from '../services/authAPI'
 
 const SignIn = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [verifyOtp] = useVerifyOtpMutation();
+  const [verifyOtp] = useVerifyOtpMutation()
 
-  const [mobilenumber, setMobilenumber] = React.useState("8270214342");
-  const [otp, setOtp] = React.useState("123456");
-  const state = useSelector((state) => state);
-  console.log(state);
+  const [mobilenumber, setMobilenumber] = React.useState('6381043494')
+  const [otp, setOtp] = React.useState('123456')
+  const state = useSelector((state) => state)
+  console.log(state)
 
   const signIn = (data) => {
     verifyOtp({
@@ -24,10 +24,10 @@ const SignIn = () => {
     })
       .unwrap()
       .then((res) => {
-        const { user, ...rest } = res;
-        dispatch(addTokens(rest));
-      });
-  };
+        const { user, ...rest } = res
+        dispatch(addTokens(rest))
+      })
+  }
 
   return (
     <View>
@@ -46,7 +46,7 @@ const SignIn = () => {
       />
       <Button title="Sign in" onPress={() => signIn({ mobilenumber, otp })} />
     </View>
-  );
-};
+  )
+}
 
-export default SignIn;
+export default SignIn

@@ -1,48 +1,72 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Button, Text, View } from "react-native";
-import { useDispatch } from "react-redux";
-import { removeTokens } from "../features/auth/authSlice";
-
-import { useGetMembersQuery } from "../services/membersAPI";
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, SafeAreaView, Button, Text, View } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { removeTokens } from '../features/auth/authSlice'
+import { useGetMembersQuery } from '../services/membersAPI'
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const [members, setMembers] = useState([]);
+  const dispatch = useDispatch()
+  const [members, setMembers] = useState([])
 
-  const { data: membersList, isLoading } = useGetMembersQuery();
+  const { data: membersList, isLoading } = useGetMembersQuery()
 
   const signOut = () => {
-    dispatch(removeTokens());
-  };
+    dispatch(removeTokens())
+  }
 
   useEffect(() => {
     if (!isLoading) {
-      setMembers(membersList);
+      setMembers(membersList)
     }
-  }, [isLoading, membersList]);
+  }, [isLoading, membersList])
 
   return (
-    <View style={styles.container}>
-      {members &&
-        members.map((member) => (
-          <Text style={styles.bigBlue} key={member.id}>
-            {member.name}
-          </Text>
-        ))}
+    <SafeAreaView>
+      <View style={styles.container}>
+        {members &&
+          members.map((member) => (
+            <View style={styles.border}>
+              <Text style={styles.paragraph} key={member.id}>
+                {member.name}
+              </Text>
+              <Text style={styles.paragraph} key={member.id}>
+                {member.mobile_number}
+              </Text>
+            </View>
+          ))}
 
-      <Button title="Sign out" onPress={signOut} />
-    </View>
-  );
-};
+        <Button title="Sign out" onPress={signOut} />
+      </View>
+    </SafeAreaView>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    flex: 1,
+    alignItems: 'stretch',
+    paddingTop: 40,
+    backgroundColor: 'white',
   },
-  bigBlue: {
-    color: "blue",
-    fontWeight: "bold",
-    fontSize: 30,
+  paragraph: {
+    margin: 7,
+    fontSize: 11,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
   },
-});
-export default Home;
+  border: {
+    borderRadius: 6,
+    elevation: 3,
+    backgroundColor: '#fff',
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: '#333',
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    marginHorizontal: 4,
+    marginVertical: 6,
+    marginHorizontal: 18,
+    marginVertical: 10,
+  },
+})
+export default Home
