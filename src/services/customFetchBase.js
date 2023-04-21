@@ -4,7 +4,7 @@ import { addTokens, removeTokens } from "../features/auth/authSlice";
 
 const mutex = new Mutex();
 
-const baseUrl = "http://192.168.1.4:3005";
+const baseUrl = "http://localhost:3005";
 
 const baseQuery = fetchBaseQuery({
   baseUrl,

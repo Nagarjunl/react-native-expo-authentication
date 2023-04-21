@@ -17,17 +17,12 @@ import Home from "./src/pages/home";
 import { StyleSheet, Button, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TextInput, TouchableOpacity } from "react-native";
-
-
-
+import Member from "./src/pages/createMember";
 
 function HomeScreen() {
-
   const SignIn = () => {
-  fetch('')
-}
-
-
+    fetch("");
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -100,6 +95,7 @@ const DrawerNav = () => {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       <Drawer.Screen name="TabScreen" component={TabNav} />
+      <Drawer.Screen name="Member" component={Member} />
     </Drawer.Navigator>
   );
 };

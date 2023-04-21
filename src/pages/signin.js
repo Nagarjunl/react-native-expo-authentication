@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, TextInput, View } from "react-native";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { addTokens } from "../features/auth/authSlice";
 
@@ -12,8 +12,10 @@ const SignIn = () => {
 
   const [verifyOtp] = useVerifyOtpMutation();
 
-  const [mobilenumber, setMobilenumber] = React.useState("9790056175");
-  const [otp, setOtp] = React.useState("590852");
+  const [mobilenumber, setMobilenumber] = React.useState("8270214342");
+  const [otp, setOtp] = React.useState("123456");
+  const state = useSelector((state) => state);
+  console.log(state);
 
   const signIn = (data) => {
     verifyOtp({
