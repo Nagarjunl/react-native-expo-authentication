@@ -1,42 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, SafeAreaView, Button, Text, View } from 'react-native'
-import { useDispatch } from 'react-redux'
+
 import { removeTokens } from '../features/auth/authSlice'
-import { useGetMembersQuery } from '../services/membersAPI'
 
 const Home = () => {
-  const dispatch = useDispatch()
-  const [members, setMembers] = useState([])
-
-  const { data: membersList, isLoading } = useGetMembersQuery()
-
   const signOut = () => {
     dispatch(removeTokens())
   }
 
-  useEffect(() => {
-    if (!isLoading) {
-      setMembers(membersList)
-    }
-  }, [isLoading, membersList])
-
   return (
     <SafeAreaView>
-      <View style={styles.container}>
-        {members &&
-          members.map((member) => (
-            <View style={styles.border}>
-              <Text style={styles.paragraph} key={member.id}>
-                {member.name}
-              </Text>
-              <Text style={styles.paragraph} key={member.id}>
-                {member.mobile_number}
-              </Text>
-            </View>
-          ))}
-
-        <Button title="Sign out" onPress={signOut} />
-      </View>
+      <Button title="Sign out" onPress={signOut} />
     </SafeAreaView>
   )
 }

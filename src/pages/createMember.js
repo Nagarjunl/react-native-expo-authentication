@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Button, TextInput, View, Text } from 'react-native'
-import { usePostMembersMutation } from '../services/membersAPI'
+import {
+  usePostMembersMutation,
+  useGetMembersQuery,
+} from '../services/membersAPI'
+import { useDispatch } from 'react-redux'
 import { useForm, Controller } from 'react-hook-form'
 
 function CreateMember() {
@@ -16,7 +20,8 @@ function CreateMember() {
     },
   })
   const [postMember] = usePostMembersMutation()
-
+  const [members, setMembers] = useState([])
+  const { data: membersList, isLoading } = useGetMembersQuery()
   const createMember = async (data) => {
     const { name, mobile_number, id_proof } = data
 
@@ -36,6 +41,11 @@ function CreateMember() {
     createMember(data)
     console.log(data)
   }
+  useEffect(() => {
+    if (!isLoading) {
+      setMembers(membersList)
+    }
+  }, [isLoading, membersList])
 
   return (
     <>
@@ -81,6 +91,20 @@ function CreateMember() {
         <View style={styles.button}>
           <Button title="Add a member" onPress={handleSubmit(onSubmit)} />
         </View>
+
+        <View style={styles.memberlist}>
+          {members &&
+            members.map((member) => (
+              <View style={styles.border}>
+                <Text style={styles.paragraph} key={member.id}>
+                  {member.name}
+                </Text>
+                <Text style={styles.mobilenumber} key={member.id}>
+                  {member.mobile_number}
+                </Text>
+              </View>
+            ))}
+        </View>
       </View>
     </>
   )
@@ -113,10 +137,42 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     margin: 4,
+    backgroundColor: 'white',
   },
   fixToText: {
     justifyContent: 'center',
     borderRadius: 40,
+  },
+  memberlist: {
+    flex: 1,
+    alignItems: 'stretch',
+    paddingTop: 40,
+    backgroundColor: 'white',
+  },
+  paragraph: {
+    margin: 7,
+    fontSize: 15,
+    textAlign: 'left',
+    color: '#34495e',
+  },
+  mobilenumber: {
+    margin: 7,
+    fontSize: 15,
+    textAlign: 'right',
+    color: '#34495e',
+  },
+  border: {
+    borderRadius: 6,
+    elevation: 3,
+    backgroundColor: '#fff',
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: '#333',
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    marginHorizontal: 4,
+    marginVertical: 6,
+    marginHorizontal: 18,
+    marginVertical: 10,
   },
 })
 
