@@ -1,40 +1,42 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, SafeAreaView, Button, Text, View } from 'react-native'
+import React, { useEffect, useState } from "react";
+import { StyleSheet, SafeAreaView, Button, Text, View } from "react-native";
 
-import { removeTokens } from '../features/auth/authSlice'
+import { removeTokens } from "../features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const signOut = () => {
-    dispatch(removeTokens())
-  }
+    dispatch(removeTokens());
+  };
 
   return (
     <SafeAreaView>
       <Button title="Sign out" onPress={signOut} />
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'stretch',
+    alignItems: "stretch",
     paddingTop: 40,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   paragraph: {
     margin: 7,
     fontSize: 11,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#34495e",
   },
   border: {
     borderRadius: 6,
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#333',
+    shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 2,
     marginHorizontal: 4,
@@ -42,5 +44,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 18,
     marginVertical: 10,
   },
-})
-export default Home
+});
+export default Home;

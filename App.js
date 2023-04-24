@@ -17,7 +17,8 @@ import Home from "./src/pages/home";
 import { StyleSheet, Button, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { TextInput, TouchableOpacity } from "react-native";
-import Member from "./src/pages/createMember";
+import Member from "./src/pages/member/createMember";
+import Chit from "./src/pages/chit/createChit";
 
 function HomeScreen() {
   const SignIn = () => {
@@ -96,6 +97,7 @@ const DrawerNav = () => {
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       <Drawer.Screen name="TabScreen" component={TabNav} />
       <Drawer.Screen name="Member" component={Member} />
+      <Drawer.Screen name="Chit" component={Chit} />
     </Drawer.Navigator>
   );
 };
@@ -127,9 +129,7 @@ function App() {
 export default () => {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <App />
-      </PersistGate>
+      <App />
     </Provider>
   );
 };
