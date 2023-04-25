@@ -31,6 +31,7 @@
     "react-native-gesture-handler": "~2.9.0",
     "react-native-material-menu": "^2.0.0",
     "react-native-modal-datetime-picker": "^15.0.0",
+    "react-native-modern-datepicker": "^1.0.0-beta.91",
     "react-native-numeric-pad": "^1.1.5",
     "react-native-pager-view": "6.1.2",
     "react-native-paper": "^5.7.0",

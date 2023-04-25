@@ -1,8 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "../features/rootReducer";
-import { authApi } from "../services/authAPI";
-import { membersApi } from "../services/membersAPI";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { configureStore } from '@reduxjs/toolkit'
+import rootReducer from '../features/rootReducer'
+import { authApi } from '../services/authAPI'
+import { membersApi } from '../services/membersAPI'
+import { chitsApi } from '../services/chitsAPI'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import {
   persistStore,
@@ -13,15 +14,15 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
+} from 'redux-persist'
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage: AsyncStorage,
-  whitelist: ["auth"],
-};
+  whitelist: ['auth'],
+}
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -30,7 +31,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authApi.middleware, membersApi.middleware),
-});
+    }).concat(authApi.middleware, membersApi.middleware, chitsApi.middleware),
+})
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(store)
