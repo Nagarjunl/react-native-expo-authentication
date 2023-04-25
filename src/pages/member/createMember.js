@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Button, TextInput, View, Text } from "react-native";
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Button, TextInput, View, Text } from 'react-native'
 import {
   usePostMembersMutation,
   useGetMembersQuery,
-} from "../../services/membersAPI";
-import { useForm, Controller } from "react-hook-form";
+} from '../../services/membersAPI'
+import { useForm, Controller } from 'react-hook-form'
 
 function CreateMember() {
   const {
@@ -14,15 +14,15 @@ function CreateMember() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      mobile_number: "",
+      name: '',
+      mobile_number: '',
     },
-  });
-  const [postMember] = usePostMembersMutation();
-  const [members, setMembers] = useState([]);
-  const { data: membersList, isLoading } = useGetMembersQuery();
+  })
+  const [postMember] = usePostMembersMutation()
+  const [members, setMembers] = useState([])
+  const { data: membersList, isLoading } = useGetMembersQuery()
   const createMember = async (data) => {
-    const { name, mobile_number, id_proof } = data;
+    const { name, mobile_number, id_proof } = data
 
     await postMember({
       name: name,
@@ -30,17 +30,17 @@ function CreateMember() {
       //   id_proof: id_proof.length === 0 ? "" : id_proof,
     })
       .unwrap()
-      .then(() => reset());
-  };
+      .then(() => reset())
+  }
 
   const onSubmit = (data) => {
-    createMember(data);
-  };
+    createMember(data)
+  }
   useEffect(() => {
     if (!isLoading) {
-      setMembers(membersList);
+      setMembers(membersList)
     }
-  }, [isLoading, membersList]);
+  }, [isLoading, membersList])
 
   return (
     <>
@@ -98,7 +98,7 @@ function CreateMember() {
         </View>
       </View>
     </>
-  );
+  )
 }
 const styles = StyleSheet.create({
   input: {
@@ -106,12 +106,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     borderRadius: 7,
-    borderColor: "#a9a9a9",
+    borderColor: '#a9a9a9',
     marginTop: 12,
   },
   button: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     borderRadius: 10,
   },
   profileImgContainer: {
@@ -119,44 +119,44 @@ const styles = StyleSheet.create({
     height: 150,
     marginLeft: 120,
     borderRadius: 150 / 2,
-    overflow: "hidden",
+    overflow: 'hidden',
     borderWidth: 3,
-    borderColor: "red",
+    borderColor: 'red',
   },
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     margin: 4,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   fixToText: {
-    justifyContent: "center",
+    justifyContent: 'center',
     borderRadius: 40,
   },
   memberList: {
     flex: 1,
-    alignItems: "stretch",
+    alignItems: 'stretch',
     paddingTop: 40,
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
   paragraph: {
     margin: 7,
     fontSize: 15,
-    textAlign: "left",
-    color: "#34495e",
+    textAlign: 'left',
+    color: '#34495e',
   },
   mobileNumber: {
     margin: 7,
     fontSize: 15,
-    textAlign: "right",
-    color: "#34495e",
+    textAlign: 'right',
+    color: '#34495e',
   },
   border: {
     borderRadius: 6,
     elevation: 3,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: "#333",
+    shadowColor: '#333',
     shadowOpacity: 0.3,
     shadowRadius: 2,
     marginHorizontal: 4,
@@ -164,6 +164,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 18,
     marginVertical: 10,
   },
-});
+})
 
-export default CreateMember;
+export default CreateMember
